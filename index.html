@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Travel Planner</h1>
+        <form id="travelForm">
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" required>
+            </div>
+            <div class="form-group">
+                <label for="source">Source:</label>
+                <input type="text" id="source" name="source" required>
+            </div>
+            <div class="form-group">
+                <label for="numDays">No. of Days:</label>
+                <input type="number" id="numDays" name="numDays" required>
+            </div>
+            <button type="submit">Plan Trip</button>
+        </form>
+        <div class="output">
+            <h2>Itinerary:</h2>
+            <p id="itinerary">Your itinerary will be displayed here.</p>
+            <h2>Estimated Budget:</h2>
+            <p id="budget">Your estimated budget will be displayed here.</p>
+        </div>
+    </div>
+
+    <script>
+	// Function to send an HTTP POST request to the backend
+    async function planTrip() {
+        const destination = document.getElementById("destination").value;
+        const source = document.getElementById("source").value;
+        const numDays = document.getElementById("numDays").value;
+
+        // Create a JSON object with user inputs
+        const data = {
+            destination,
+            source,
+            numDays
+        };
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/plan_trip', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch data from the server.');
+            }
+
+            const responseData = await response.json();
+
+            // Update the UI with the response data
+            document.getElementById("itinerary").innerHTML = responseData.itinerary;
+			document.getElementById("budget").innerHTML = `Estimated Budget: ${responseData.budget}`;
+        } catch (error) {
+            console.error(error);
+            // Handle errors gracefully in the UI
+            document.getElementById("itinerary").textContent = 'Error occurred while planning the trip.';
+            document.getElementById("budget").textContent = '';
+        }
+    }
+
+    // Attach the planTrip function to the form submission
+    document.getElementById("travelForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        planTrip(); // Call the planTrip function when the form is submitted
+    });
+    </script>
+</body>
+</html>
+
