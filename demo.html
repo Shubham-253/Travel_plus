@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Travel Planner</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-4 mb-4">Travel Planner</h1>
+    <form id="travelForm">
+      <div class="form-group">
+        <label for="destination">Destination:</label>
+        <input type="text" class="form-control" id="destination" placeholder="Enter destination" required>
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration (in days):</label>
+        <input type="number" class="form-control" id="duration" placeholder="Enter duration" required>
+      </div>
+      <div class="form-group">
+        <label for="interests">Interests:</label>
+        <select class="form-control" id="interests">
+          <option value="sightseeing">Sightseeing</option>
+          <option value="food">Food</option>
+          <option value="culture">Culture</option>
+          <option value="outdoor activities">Outdoor Activities</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="budget">Budget:</label>
+        <select class="form-control" id="budget">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="accommodationPreferences">Accommodation Preferences:</label>
+        <select class="form-control" id="accommodationPreferences">
+          <option value="hotel">Hotel</option>
+          <option value="hostel">Hostel</option>
+          <option value="airbnb">Airbnb</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="travelStyle">Travel Style:</label>
+        <select class="form-control" id="travelStyle">
+          <option value="budget">Budget</option>
+          <option value="luxury">Luxury</option>
+          <option value="adventure">Adventure</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="specialRequirements">Special Requirements:</label>
+        <input type="text" class="form-control" id="specialRequirements" placeholder="Enter special requirements">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script src="script2.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
